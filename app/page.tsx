@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Phone, Send, ArrowUp, X } from "lucide-react";
+import { Mail, Phone, Send, ArrowUp, X, Instagram } from "lucide-react";
 
 export default function VisualsByAarxn() {
   const [formData, setFormData] = useState({ name: "", email: "", package: "General Inquiry", message: "" });
@@ -95,10 +95,10 @@ export default function VisualsByAarxn() {
               {['portfolio', 'wedding', 'portrait', 'contact'].map((id) => (
                 <motion.button 
                   key={id} 
-                  whileHover={{ scale: 1.05, backgroundColor: "rgba(251,191,36,1)", color: "#000", boxShadow: "0 0 20px rgba(251,191,36,0.4)" }}
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(251,191,36,1)", color: "#000", boxShadow: "0 0 25px rgba(251,191,36,0.5)" }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => scrollTo(id)} 
-                  className="px-6 py-4 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-full font-bold uppercase text-[9px] tracking-widest transition-colors duration-300"
+                  className="px-6 py-4 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-full font-bold uppercase text-[9px] tracking-widest transition-all duration-300"
                 >
                   {id}
                 </motion.button>
@@ -106,7 +106,7 @@ export default function VisualsByAarxn() {
             </div>
           </section>
 
-          {/* GALLERY SECTION */}
+          {/* GALLERY */}
           <section id="portfolio" className="px-4 py-20 max-w-7xl mx-auto bg-black/40 backdrop-blur-xl rounded-[2.5rem] my-10 border border-white/5">
             <div className="mb-12 inline-block relative px-2">
                <motion.h2 className="text-4xl md:text-7xl font-serif italic mb-1">Gallery</motion.h2>
@@ -116,11 +116,10 @@ export default function VisualsByAarxn() {
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
                 <motion.div 
                   key={num} 
-                  whileHover={{ scale: 1.05, zIndex: 10, filter: "brightness(1.1)" }}
+                  whileHover={{ scale: 1.05, zIndex: 10 }}
                   initial={{ opacity: 0, y: 20 }} 
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
                   onClick={() => setSelectedImg(num)}
                   className="aspect-[3/4] rounded-2xl overflow-hidden border border-white/10 bg-neutral-900 shadow-2xl cursor-zoom-in transition-all duration-300"
                 >
@@ -130,7 +129,7 @@ export default function VisualsByAarxn() {
             </div>
           </section>
 
-          {/* PACKAGES SECTIONS (Weddings & Portraits) */}
+          {/* PACKAGES */}
           {[
             { id: "wedding", title: "Weddings", pkgs: [
               { name: "Simple", price: "1,500", items: ["4 Hours", "200+ Photos"] },
@@ -149,13 +148,20 @@ export default function VisualsByAarxn() {
                 {section.pkgs.map((pkg, i) => (
                   <motion.div 
                     key={i} 
-                    whileHover={{ y: -10, borderColor: "rgba(251,191,36,0.5)", transition: { duration: 0.3 } }}
-                    className={`p-8 rounded-[2rem] border transition-all duration-300 ${pkg.featured ? 'bg-black border-amber-400 shadow-[0_0_30px_rgba(251,191,36,0.1)]' : 'bg-white/5 border-white/10 backdrop-blur-md'}`}
+                    whileHover={{ y: -10, borderColor: "rgba(251,191,36,0.5)" }}
+                    className={`p-8 rounded-[2rem] border transition-all duration-300 ${pkg.featured ? 'bg-black border-amber-400 shadow-[0_0_30px_rgba(251,191,36,0.15)]' : 'bg-white/5 border-white/10 backdrop-blur-md'}`}
                   >
                     <h3 className={`text-2xl font-serif italic mb-2 ${pkg.featured ? 'text-amber-400' : ''}`}>{pkg.name}</h3>
                     <p className="text-2xl font-bold mb-6">${pkg.price} TTD</p>
                     <ul className="text-left space-y-3 uppercase text-[9px] tracking-widest opacity-70 mb-8">{pkg.items.map((item, idx) => <li key={idx}>• {item}</li>)}</ul>
-                    <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => scrollTo('contact')} className={`w-full py-4 rounded-xl text-[9px] font-bold uppercase tracking-widest ${pkg.featured ? 'bg-amber-400 text-black' : 'border border-white/20'}`}>Book {pkg.name}</motion.button>
+                    <motion.button 
+                        whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(251,191,36,0.7)", backgroundColor: "#fbbf24", color: "#000" }} 
+                        whileTap={{ scale: 0.98 }} 
+                        onClick={() => scrollTo('contact')} 
+                        className={`w-full py-4 rounded-xl text-[9px] font-bold uppercase tracking-widest transition-all duration-300 ${pkg.featured ? 'bg-amber-400 text-black shadow-lg shadow-amber-400/20' : 'border border-white/20 text-white'}`}
+                    >
+                        Book {pkg.name}
+                    </motion.button>
                   </motion.div>
                 ))}
               </div>
@@ -166,21 +172,39 @@ export default function VisualsByAarxn() {
           <section id="contact" className="bg-white text-black px-4 py-32 rounded-t-[3rem] md:rounded-t-[5rem]">
             <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div className="space-y-6">
-                  <h2 className="text-6xl font-serif italic mb-8">Let's Talk</h2>
-                  <motion.a whileHover={{ x: 10 }} href="mailto:visualsbyaarxn@gmail.com" className="flex items-center gap-4 p-6 border rounded-2xl hover:bg-neutral-50 transition-all">
-                    <Mail size={24} className="text-amber-600" />
-                    <div><p className="text-[10px] uppercase font-bold text-neutral-400">Email</p><p className="text-xl font-serif italic">visualsbyaarxn@gmail.com</p></div>
-                  </motion.a>
-                  <motion.a whileHover={{ x: 10 }} href="https://wa.me/18687573042" className="flex items-center gap-4 p-6 border rounded-2xl hover:bg-neutral-50 transition-all">
-                    <Phone size={24} className="text-amber-600" />
-                    <div><p className="text-[10px] uppercase font-bold text-neutral-400">WhatsApp</p><p className="text-xl font-serif italic">+1 (868) 757-3042</p></div>
-                  </motion.a>
+                  <div className="inline-block relative">
+                    <h2 className="text-6xl font-serif italic mb-4">Let's Talk</h2>
+                    <motion.div initial={{ width: 0 }} whileInView={{ width: "100%" }} viewport={{ once: true }} transition={{ duration: 1.2, ease: "easeInOut" }} className="h-[2px] bg-amber-500 absolute bottom-0 left-0" />
+                  </div>
+                  
+                  <div className="mt-10 space-y-4">
+                    <motion.a whileHover={{ x: 10 }} href="https://instagram.com/visualsbyaarxn" target="_blank" className="flex items-center gap-4 p-6 border rounded-2xl hover:bg-neutral-50 transition-all">
+                        <Instagram size={24} className="text-amber-600" />
+                        <div><p className="text-[10px] uppercase font-bold text-neutral-400">Instagram</p><p className="text-xl font-serif italic">@visualsbyaarxn</p></div>
+                    </motion.a>
+
+                    <motion.a whileHover={{ x: 10 }} href="mailto:visualsbyaarxn@gmail.com" className="flex items-center gap-4 p-6 border rounded-2xl hover:bg-neutral-50 transition-all">
+                        <Mail size={24} className="text-amber-600" />
+                        <div><p className="text-[10px] uppercase font-bold text-neutral-400">Email</p><p className="text-xl font-serif italic">visualsbyaarxn@gmail.com</p></div>
+                    </motion.a>
+
+                    <motion.a whileHover={{ x: 10 }} href="https://wa.me/18687573042" className="flex items-center gap-4 p-6 border rounded-2xl hover:bg-neutral-50 transition-all">
+                        <Phone size={24} className="text-amber-600" />
+                        <div><p className="text-[10px] uppercase font-bold text-neutral-400">WhatsApp</p><p className="text-xl font-serif italic">+1 (868) 757-3042</p></div>
+                    </motion.a>
+                  </div>
                 </div>
-                <form onSubmit={handleSubmit} className="space-y-4 bg-neutral-50 p-8 rounded-[2rem]">
+
+                <form onSubmit={handleSubmit} className="space-y-4 bg-neutral-50 p-8 rounded-[2rem] border border-neutral-100">
                   <input required type="text" placeholder="Your Name" className="w-full p-4 rounded-xl border-none outline-none ring-1 ring-black/5 focus:ring-amber-500 transition-all" />
                   <input required type="email" placeholder="Your Email" className="w-full p-4 rounded-xl border-none outline-none ring-1 ring-black/5 focus:ring-amber-500 transition-all" />
-                  <textarea required rows={4} placeholder="Your vision..." className="w-full p-4 rounded-xl border-none outline-none ring-1 ring-black/5 focus:ring-amber-500 transition-all" />
-                  <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} type="submit" className="w-full py-5 bg-black text-white rounded-xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2">
+                  <textarea required rows={4} placeholder="What can I capture for you?" className="w-full p-4 rounded-xl border-none outline-none ring-1 ring-black/5 focus:ring-amber-500 transition-all" />
+                  <motion.button 
+                    whileHover={{ scale: 1.02, backgroundColor: "#000", color: "#fff", boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }} 
+                    whileTap={{ scale: 0.98 }} 
+                    type="submit" 
+                    className="w-full py-5 bg-black text-white rounded-xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 transition-all"
+                  >
                     Send Inquiry <Send size={14} />
                   </motion.button>
                 </form>
@@ -189,7 +213,7 @@ export default function VisualsByAarxn() {
 
           <footer className="bg-white py-12 text-center text-neutral-400 text-[8px] tracking-widest uppercase border-t border-neutral-100">
             Visuals by Aarxn • © 2026
-            <motion.button whileHover={{ y: -5 }} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="block mx-auto mt-6 p-4 rounded-full border border-neutral-100 text-black"><ArrowUp size={18} /></motion.button>
+            <motion.button whileHover={{ y: -5, scale: 1.1, backgroundColor: "#000", color: "#fff" }} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="block mx-auto mt-6 p-4 rounded-full border border-neutral-100 text-black transition-all duration-300 shadow-sm"><ArrowUp size={18} /></motion.button>
           </footer>
         </div>
       </div>
