@@ -24,26 +24,13 @@ export default function VisualsByAarxn() {
     window.location.href = `mailto:visualsbyaarxn@gmail.com?subject=${subject}&body=${body}`;
   };
 
- const headerZoomVariant = {
-    initial: { opacity: 0, scale: 0.8, y: 20 },
-    whileInView: { opacity: 1, scale: 1, y: 0 },
-    viewport: { once: true, margin: "-50px" },
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } // Using a math array instead of a string
-  };
-
-  const lineDrawDelayedVariant = {
-    initial: { width: 0, opacity: 0 },
-    whileInView: { width: "100%", opacity: 1 },
-    viewport: { once: true },
-    transition: { delay: 0.6, duration: 1.2, ease: [0.43, 0.13, 0.23, 0.96] }
-  };
   if (!mounted) return null;
 
   return (
     <div className="min-h-screen text-white bg-black selection:bg-amber-200 selection:text-black overflow-x-hidden font-sans antialiased">
       <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
 
-      {/* LIGHTBOX */}
+      {/* LIGHTBOX / FULL IMAGE VIEW */}
       <AnimatePresence>
         {selectedImg && (
           <motion.div 
@@ -83,7 +70,7 @@ export default function VisualsByAarxn() {
         </div>
 
         <div className="relative z-20">
-          {/* HERO SECTION - MOBILE OPTIMIZED */}
+          {/* HERO SECTION */}
           <section className="relative flex flex-col items-center justify-center text-center px-4 min-h-screen">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2 }}>
               <h1 
@@ -113,17 +100,27 @@ export default function VisualsByAarxn() {
                 </button>
               ))}
             </div>
-            
-            <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute bottom-8 opacity-40 cursor-pointer hidden sm:block" onClick={() => scrollTo('portfolio')}>
-              <ChevronDown size={30} />
-            </motion.div>
           </section>
 
-          {/* GALLERY - GRID OPTIMIZED */}
+          {/* GALLERY SECTION */}
           <section id="portfolio" className="px-4 py-20 max-w-7xl mx-auto bg-black/40 backdrop-blur-lg rounded-[2.5rem] my-10 border border-white/5">
             <div className="mb-12 inline-block relative px-2">
-               <motion.h2 {...headerZoomVariant} className="text-4xl md:text-7xl font-serif italic mb-1">Gallery</motion.h2>
-               <motion.div {...lineDrawDelayedVariant} className="h-[2px] bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.6)] absolute bottom-0 left-0" />
+               <motion.h2 
+                 initial={{ opacity: 0, scale: 0.8 }} 
+                 whileInView={{ opacity: 1, scale: 1 }} 
+                 viewport={{ once: true }} 
+                 transition={{ duration: 0.7 }}
+                 className="text-4xl md:text-7xl font-serif italic mb-1"
+                >
+                  Gallery
+                </motion.h2>
+               <motion.div 
+                 initial={{ width: 0 }} 
+                 whileInView={{ width: "100%" }} 
+                 viewport={{ once: true }} 
+                 transition={{ delay: 0.5, duration: 1 }}
+                 className="h-[2px] bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.6)] absolute bottom-0 left-0" 
+               />
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
@@ -131,17 +128,31 @@ export default function VisualsByAarxn() {
                   key={num} whileHover={{ scale: 1.02 }} onClick={() => setSelectedImg(num)}
                   className="aspect-[3/4] rounded-2xl overflow-hidden border border-white/10 bg-neutral-900 shadow-xl cursor-zoom-in"
                 >
-                  <img src={`/gallery/img${num}.jpg`} className="w-full h-full object-cover" alt="Portfolio item" />
+                  <img src={`/gallery/img${num}.jpg`} className="w-full h-full object-cover" alt="Portfolio" />
                 </motion.div>
               ))}
             </div>
           </section>
 
-          {/* WEDDING PACKAGES */}
+          {/* WEDDING SECTION */}
           <section id="wedding" className="px-4 py-24 max-w-7xl mx-auto text-center">
             <div className="mb-16 inline-block relative">
-               <motion.h2 {...headerZoomVariant} className="text-4xl md:text-7xl font-serif italic mb-1">Weddings</motion.h2>
-               <motion.div {...lineDrawDelayedVariant} className="h-[2px] bg-amber-400 mx-auto absolute bottom-0 left-0 right-0" />
+               <motion.h2 
+                 initial={{ opacity: 0, scale: 0.8 }} 
+                 whileInView={{ opacity: 1, scale: 1 }} 
+                 viewport={{ once: true }} 
+                 transition={{ duration: 0.7 }}
+                 className="text-4xl md:text-7xl font-serif italic mb-1"
+               >
+                 Weddings
+               </motion.h2>
+               <motion.div 
+                 initial={{ width: 0 }} 
+                 whileInView={{ width: "100%" }} 
+                 viewport={{ once: true }} 
+                 transition={{ delay: 0.5, duration: 1 }}
+                 className="h-[2px] bg-amber-400 mx-auto absolute bottom-0 left-0 right-0" 
+               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
@@ -161,11 +172,25 @@ export default function VisualsByAarxn() {
             </div>
           </section>
 
-          {/* PORTRAIT PACKAGES */}
+          {/* PORTRAIT SECTION */}
           <section id="portrait" className="px-4 py-24 max-w-7xl mx-auto text-center">
             <div className="mb-16 inline-block relative">
-               <motion.h2 {...headerZoomVariant} className="text-4xl md:text-7xl font-serif italic mb-1">Portraits</motion.h2>
-               <motion.div {...lineDrawDelayedVariant} className="h-[2px] bg-amber-400 mx-auto absolute bottom-0 left-0 right-0" />
+               <motion.h2 
+                 initial={{ opacity: 0, scale: 0.8 }} 
+                 whileInView={{ opacity: 1, scale: 1 }} 
+                 viewport={{ once: true }} 
+                 transition={{ duration: 0.7 }}
+                 className="text-4xl md:text-7xl font-serif italic mb-1"
+               >
+                 Portraits
+               </motion.h2>
+               <motion.div 
+                 initial={{ width: 0 }} 
+                 whileInView={{ width: "100%" }} 
+                 viewport={{ once: true }} 
+                 transition={{ delay: 0.5, duration: 1 }}
+                 className="h-[2px] bg-amber-400 mx-auto absolute bottom-0 left-0 right-0" 
+               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
@@ -189,7 +214,14 @@ export default function VisualsByAarxn() {
           <section id="contact" className="bg-white text-black px-4 py-32 rounded-t-[3rem] md:rounded-t-[5rem]">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-16">
-                  <motion.h2 {...headerZoomVariant} className="text-5xl md:text-8xl font-serif font-bold italic mb-4">Let's Talk</motion.h2>
+                  <motion.h2 
+                    initial={{ opacity: 0, y: 20 }} 
+                    whileInView={{ opacity: 1, y: 0 }} 
+                    viewport={{ once: true }}
+                    className="text-5xl md:text-8xl font-serif font-bold italic mb-4"
+                  >
+                    Let's Talk
+                  </motion.h2>
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div className="space-y-6">
