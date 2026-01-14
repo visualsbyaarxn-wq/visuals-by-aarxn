@@ -24,20 +24,19 @@ export default function VisualsByAarxn() {
     window.location.href = `mailto:visualsbyaarxn@gmail.com?subject=${subject}&body=${body}`;
   };
 
-  const headerZoomVariant = {
+ const headerZoomVariant = {
     initial: { opacity: 0, scale: 0.8, y: 20 },
     whileInView: { opacity: 1, scale: 1, y: 0 },
     viewport: { once: true, margin: "-50px" },
-    transition: { duration: 0.7, ease: "easeOut" }
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } // Using a math array instead of a string
   };
 
   const lineDrawDelayedVariant = {
     initial: { width: 0, opacity: 0 },
     whileInView: { width: "100%", opacity: 1 },
     viewport: { once: true },
-    transition: { delay: 0.6, duration: 1.2, ease: "easeInOut" }
+    transition: { delay: 0.6, duration: 1.2, ease: [0.43, 0.13, 0.23, 0.96] }
   };
-
   if (!mounted) return null;
 
   return (
